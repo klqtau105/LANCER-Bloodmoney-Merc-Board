@@ -4503,6 +4503,10 @@
         const pilotData = <%- JSON.stringify(pilots) %>.find(p => p.id === id);
         data.relatedJobs = pilotData ? pilotData.relatedJobs : [];
         
+        // Preserve fields not present in the edit form
+        data.personalTransactions = pilotData ? (pilotData.personalTransactions || []) : [];
+        data.reserves = pilotData ? (pilotData.reserves || []) : [];
+
         // Ensure personalOperationProgress has a value (preserve existing if field doesn't exist)
         if (data.personalOperationProgress === undefined || data.personalOperationProgress === null) {
           data.personalOperationProgress = pilotData ? (pilotData.personalOperationProgress ?? 0) : 0;
